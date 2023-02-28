@@ -34,7 +34,10 @@
                         {
                            $estado=$arreCE[0]->getObjcompraestadotipo()->getCetdescripcion();
                            $idcompraestado=$arreCE[0]->getIdcompraestado();
-                           $idusuarioc=$arreCE[0]->getObjusuario()->getidusuario();
+                           $objCntrlC= new ABMcompra();
+                           $data["idcompra"]=$idcompra;
+                           $arreC=$objCntrlC->buscar($data);
+                           $idusuarioc=$arreC[0]->getObjusuario()->getidusuario();
                            echo '<tr>
                            <th scope="row">'.$idcompra.'</th>';
                            echo '
