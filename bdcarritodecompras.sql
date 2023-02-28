@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-12-2022 a las 12:50:28
+-- Tiempo de generación: 28-02-2023 a las 22:44:34
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.11
 
@@ -33,6 +33,14 @@ CREATE TABLE `compra` (
   `idusuario` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `compra`
+--
+
+INSERT INTO `compra` (`idcompra`, `cofecha`, `idusuario`) VALUES
+(1, '2023-03-01 01:28:50', 67),
+(2, '2023-03-01 01:43:19', 69);
+
 -- --------------------------------------------------------
 
 --
@@ -47,6 +55,16 @@ CREATE TABLE `compraestado` (
   `cefechafin` timestamp NULL DEFAULT NULL,
   `idusuario` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `compraestado`
+--
+
+INSERT INTO `compraestado` (`idcompraestado`, `idcompra`, `idcompraestadotipo`, `cefechaini`, `cefechafin`, `idusuario`) VALUES
+(1, 1, 0, '2023-03-01 01:28:50', '2023-03-01 01:29:00', 67),
+(2, 1, 1, '2023-03-01 01:29:00', NULL, 67),
+(3, 2, 0, '2023-03-01 01:43:19', '2023-03-01 01:43:38', 69),
+(4, 2, 1, '2023-03-01 01:43:37', NULL, 69);
 
 -- --------------------------------------------------------
 
@@ -84,6 +102,16 @@ CREATE TABLE `compraitem` (
   `cicantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `compraitem`
+--
+
+INSERT INTO `compraitem` (`idcompraitem`, `idproducto`, `idcompra`, `cicantidad`) VALUES
+(1, 4, 1, 1),
+(2, 8, 1, 1),
+(3, 3, 2, 1),
+(4, 10, 2, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -104,6 +132,7 @@ CREATE TABLE `menu` (
 
 INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabilitado`) VALUES
 (7, 'Home', '../home/paginaSegura.php', NULL, NULL),
+(8, 'Carrito', '../compra/index.php', NULL, NULL),
 (11, 'Mi perfil', '#', NULL, NULL),
 (12, 'Mis datos', '../usuario/perfil.php', 11, NULL),
 (14, 'Mis compras', '../compra/miscompras.php', 11, NULL),
@@ -114,10 +143,9 @@ INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabi
 (21, 'Depósito', '#', NULL, NULL),
 (22, 'Gestión de Producto', '../producto/listaProducto.php', 21, NULL),
 (23, 'Supervisar compras', '../compra/listaCompras.php', 21, NULL),
-(24, 'Carrito', '#', NULL, NULL),
-(25, 'Compra', '../compra/index.php', NULL, NULL),
-(29, 'Permiso menu', '../menu/asignarMenu.php', NULL, NULL),
-(30, 'Asignar Rol', '../usuario/asignarRol.php', 15, NULL);
+(24, 'Asignar rol usuario ', '../usuario/asignarRol.php', 15, NULL),
+(29, 'Asignar permisos menú', '../menu/asignarMenu.php', 15, NULL),
+(36, 'prueba', '../home/', 15, '2023-02-28 12:41:45');
 
 -- --------------------------------------------------------
 
@@ -137,6 +165,9 @@ CREATE TABLE `menurol` (
 INSERT INTO `menurol` (`idmenu`, `idrol`) VALUES
 (7, 1),
 (7, 2),
+(7, 3),
+(8, 2),
+(8, 3),
 (11, 2),
 (12, 2),
 (14, 2),
@@ -147,10 +178,8 @@ INSERT INTO `menurol` (`idmenu`, `idrol`) VALUES
 (21, 3),
 (22, 3),
 (23, 3),
-(24, 2),
-(25, 2),
-(29, 1),
-(30, 1);
+(24, 1),
+(29, 1);
 
 -- --------------------------------------------------------
 
@@ -173,17 +202,17 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`idproducto`, `pronombre`, `prodetalle`, `procantstock`, `tipo`, `precio`, `urlimagen`) VALUES
-(1, 'DAHUA', 'Camara 2mpx', 10, 'Camaras', '23000', 'https://i.ibb.co/ygNPwx6/c4.webp'),
-(2, 'DAHUA', 'DVR Dahua', 4, 'Equipos', '20900', 'https://i.ibb.co/LJzSz9f/E2.webp'),
-(3, 'DAHUA', 'Camara 3mpx', 20, 'Camaras', '30000', 'https://i.ibb.co/19KG1GP/C2.webp'),
-(4, 'HIKVISION', 'Camara 4mpx', 11, 'Camaras', '21000', 'https://i.ibb.co/wShpvTg/C3.webp'),
+(1, 'DAHUA', 'Camara 2mpx', 3, 'Camaras', '23000', 'https://i.ibb.co/ygNPwx6/c4.webp'),
+(2, 'DAHUA', 'DVR Dahua', 1, 'Equipos', '20900', 'https://i.ibb.co/LJzSz9f/E2.webp'),
+(3, 'DAHUA', 'Camara 3mpx', 6, 'Camaras', '30000', 'https://i.ibb.co/19KG1GP/C2.webp'),
+(4, 'HIKVISION', 'Camara 4mpx', 65, 'Camaras', '21000', 'https://i.ibb.co/wShpvTg/C3.webp'),
 (5, 'DAHUA', 'DVR 4108', 0, 'Equipos', '30000', 'https://i.ibb.co/SXwW8g6/E1.webp'),
-(6, 'DAHUA', 'DVR 4104', 3, 'Equipos', '18000', 'https://i.ibb.co/LJzSz9f/E2.webp'),
+(6, 'DAHUA', 'DVR 4104', 2, 'Equipos', '18000', 'https://i.ibb.co/LJzSz9f/E2.webp'),
 (7, 'DAHUA', 'Camara Domo 2mpx', 18, 'Camaras', '20000', 'https://i.ibb.co/ygNPwx6/c4.webp'),
-(8, 'HIKVISION', 'Camara Domo 5mpx', 41, 'Camaras', '32000', 'https://i.ibb.co/VQwtyXG/C5.webp'),
+(8, 'HIKVISION', 'Camara Domo 5mpx', 40, 'Camaras', '32000', 'https://i.ibb.co/VQwtyXG/C5.webp'),
 (9, 'DAHUA', 'DVR XV08', 29, 'Equipos', '30000', 'https://i.ibb.co/LJzSz9f/E2.webp'),
-(10, 'WD', 'Disco duro 1tb', 39, 'Accesorios', '35000', 'https://i.ibb.co/CpyN3tZ/A1.webp'),
-(23, 'Sony', 'camara 2mpx hd', 10, 'Camaras', '10000', 'https://i.ibb.co/ygNPwx6/c4.webp');
+(10, 'WD', 'Disco duro 1TB', 35, 'Accesorios', '35000', 'https://i.ibb.co/CpyN3tZ/A1.webp'),
+(23, 'Sony', 'camara 2mpx HD', 7, 'Camaras', '10000', 'https://i.ibb.co/ygNPwx6/c4.webp');
 
 -- --------------------------------------------------------
 
@@ -224,12 +253,21 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idusuario`, `usnombre`, `uspass`, `usmail`, `usdeshabilitado`) VALUES
-(1, 'Bruno', 'e10adc3949ba59abbe56e057f20f883e', 'br@gmail.com', NULL),
-(2, 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'br2@gmail.com', NULL),
-(3, 'Enzo Perez', '8c531d5ff27a37d697d53cab360ccf15', 'eperez@gmail.com', NULL),
-(23, 'pepa', 'c4ca4238a0b923820dcc509a6f75849b', 'pepa@pepa.com', NULL),
-(24, 'Paola', 'c4ca4238a0b923820dcc509a6f75849b', 'pao@gmail.com', NULL),
-(25, 'Agustin', 'c4ca4238a0b923820dcc509a6f75849b', 'sass@gmail.com', NULL);
+(1, 'Bruno', 'c4ca4238a0b923820dcc509a6f75849b', 'br1uno01one@gmail.com', NULL),
+(2, 'admin', '202cb962ac59075b964b07152d234b70', 'syswebtechnology@gmail.com', NULL),
+(3, 'Enzo Perez', '8c531d5ff27a37d697d53cab360ccf15', 'enzo14@gmail.com', NULL),
+(23, 'pepa', 'c4ca4238a0b923820dcc509a6f75849b', 'pepa23@gmail.com', NULL),
+(24, 'Paola', 'c4ca4238a0b923820dcc509a6f75849b', 'syswebtechnology@gmail.com', NULL),
+(25, 'Agustin', 'c4ca4238a0b923820dcc509a6f75849b', 'agustin91@gmail.com', NULL),
+(26, 'nico', 'c4ca4238a0b923820dcc509a6f75849b', 'nico1@gmail.com', '2022-12-05 05:05:19'),
+(29, 'clau', 'e10adc3949ba59abbe56e057f20f883e', 'clau@gmail.com', NULL),
+(67, 'caro', '202cb962ac59075b964b07152d234b70', 'caro11@gmail.com', NULL),
+(68, 'pedro', '202cb962ac59075b964b07152d234b70', 'pedro@gmail.com', NULL),
+(69, 'juan', '202cb962ac59075b964b07152d234b70', 'juan@gmail.com', NULL),
+(70, 'carlos', '202cb962ac59075b964b07152d234b70', 'carl@gmail.com', NULL),
+(71, 'fabi', '202cb962ac59075b964b07152d234b70', 'fabi@gmail.co', NULL),
+(72, 'ana', '202cb962ac59075b964b07152d234b70', 'ana@gmail.com', NULL),
+(73, 'raul', '202cb962ac59075b964b07152d234b70', 'raul@gmail.com', NULL);
 
 -- --------------------------------------------------------
 
@@ -247,17 +285,25 @@ CREATE TABLE `usuariorol` (
 --
 
 INSERT INTO `usuariorol` (`idusuario`, `idrol`) VALUES
+(1, 1),
 (1, 2),
 (2, 1),
 (2, 2),
 (2, 3),
 (3, 1),
 (3, 2),
-(23, 1),
 (23, 2),
-(23, 3),
 (24, 2),
-(25, 2);
+(25, 1),
+(26, 2),
+(29, 2),
+(67, 2),
+(68, 2),
+(69, 2),
+(70, 2),
+(71, 2),
+(72, 2),
+(73, 2);
 
 --
 -- Índices para tablas volcadas
@@ -348,31 +394,31 @@ ALTER TABLE `usuariorol`
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `idcompra` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `idcompra` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `compraestado`
 --
 ALTER TABLE `compraestado`
-  MODIFY `idcompraestado` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idcompraestado` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `compraitem`
 --
 ALTER TABLE `compraitem`
-  MODIFY `idcompraitem` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idcompraitem` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `idmenu` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `idmenu` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idproducto` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `idproducto` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -384,7 +430,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idusuario` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `idusuario` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- Restricciones para tablas volcadas
