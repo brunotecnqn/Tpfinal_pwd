@@ -6,8 +6,6 @@ function registrar() {
 
     document.getElementById("uspass").value = passhash;
     document.getElementById("password").value = "";
-    document.getElementById("usmail").value = "";
-    document.getElementById("usnombre").value = "";
     $("#ff").form("submit", {
       //url:'accion/alta_usuario.php',
       url: "accion/alta_usuario.php",
@@ -18,7 +16,7 @@ function registrar() {
         var result = eval("(" + result + ")");
 
         if (!result.respuesta) {
-          $.messager.show({
+          $.messager.alert({
             title: "Error",
             msg: result.errorMsg,
           });
@@ -31,7 +29,14 @@ function registrar() {
           $("#usmail").removeClass("is-valid");
           $("#usnombre").removeClass("is-valid");
           $("#password").removeClass("is-valid");
-     
+          
+         
+          document.getElementById("usmail").value = "";
+          document.getElementById("usnombre").value = "";
+          setTimeout(function(){
+            window.location.href = "../login/index.php";
+          }, 800);
+          
         }
       },
     });

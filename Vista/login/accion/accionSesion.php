@@ -8,7 +8,7 @@ $datos["usnombre"]="admin";
 $datos["uspass"]="e10adc3949ba59abbe56e057f20f883e";*/
 $resp = false;
 
-$mensaje="Datos incorrectos";
+$mensaje="";
        if(isset($datos['usnombre'])&&$datos['uspass'])
        {
   
