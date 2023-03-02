@@ -13,14 +13,14 @@ if (isset($_GET["tipo"])) {
 ?>
 <link rel="stylesheet" type="text/css" href="../css/estiloproductos.css">
 
-<script type="text/javascript" src="../js/home/paginaSegura.js"></script>
+<script src="../js/home/paginaSegura.js"></script>
 <input type="hidden" id=tipo value="<?php echo $param["tipo"];?>">
 
 	
 
 
 
-<div id="productos" class="container pt-2 pb-2">
+<div id="productos" class="row container d-flex flex-wrap justify-content-center">
 
   
   
@@ -28,7 +28,7 @@ if (isset($_GET["tipo"])) {
 </div>
 
   
-</div>
+
 
 <?php
 

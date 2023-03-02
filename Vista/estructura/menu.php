@@ -19,7 +19,7 @@ $menus = $objAbmMenu->generarMenus($objSesion);
             $res = $objAbmMenu->esSubMenu($menuOriginal, $idmenu);
 
             $val['idpadre'] = $idmenu;
-            $i=1;
+          
             if (!$res) {
 				$menusHijos = $objAbmMenu->buscar($val);
                   //verificamos si es menu padre
@@ -40,11 +40,15 @@ $menus = $objAbmMenu->generarMenus($objSesion);
 					else
 					$str.= "<li class='nav-item'><a  class='nav-link active' aria-current='page' href='" . $objMenu->getMedescripcion() . "'>" . $objMenu->getMenombre() . "</a></li>";
 				}
-                }else{
-					$str.= '<li class="nav-item dropdown"><a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown'.$i.'" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="' . $objMenu->getMedescripcion() . '">' . $objMenu->getMenombre() . '</a>';
+                }else{  
+					//alimentamos el generador de aleatorios
+srand (time());
+//generamos un número aleatorio
+$i = rand(1,1000);
+					$str.= '<li class="nav-item dropdown"><a class="nav-link dropdown-toggle active"  id="navbarDropdown'.$i.'" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="' . $objMenu->getMedescripcion() . '">' . $objMenu->getMenombre() . '</a>';
 					
 					$str.='<ul class="dropdown-menu" aria-labelledby="navbarDropdown'.$i.'">';
-					$i++;
+					$i++;   
 				   //creamos submenus u objeto menu hijo
                  
 					foreach ($menusHijos as $submenu) {
@@ -66,7 +70,7 @@ $menus = $objAbmMenu->generarMenus($objSesion);
                 $str.="";
             }
 			
-            
+			
         }
 		$str.='<li class="nav-item bg-dark"><a  class="nav-link active" aria-current="page"   href="javascript:void(0)" onclick="cerrarSesion()">'.$nombre.'<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
 		<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4m7 14l5-5l-5-5m5 5H9" />

@@ -29,11 +29,7 @@ if ($resp && $permisosOk) {
 <html lang="es">
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="Expires" content="0">
-  <meta http-equiv="Last-Modified" content="0">
-  <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
-  <meta http-equiv="Pragma" content="no-cache"><!---->
+	
 	<title><?php echo $titulo; ?></title>
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<link rel="icon" href="../css/images/icon-sis.png" type="image/x-icon">
@@ -45,11 +41,11 @@ if ($resp && $permisosOk) {
 	<link rel="stylesheet" type="text/css" href="../js/jquery-easyui-1.10.8/themes/color.css">
 	<link rel="stylesheet" type="text/css" href="../js/jquery-easyui-1.10.8/demo/demo.css">
 
-	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 
-	<script type="text/javascript" src="../js/jquery-easyui-1.10.8/jquery.min.js"></script>
-	<script type="text/javascript" src="../js/jquery-easyui-1.10.8/jquery.easyui.min.js"></script>
+	<script src="../js/jquery-easyui-1.10.8/jquery.min.js"></script>
+	<script src="../js/jquery-easyui-1.10.8/jquery.easyui.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
 
@@ -58,7 +54,7 @@ if ($resp && $permisosOk) {
 <body>
 	<div class="row md-12">
 
-		<div id="logo" align="center" style="width: 100%;height: 150px;background-image: url('../css/images/logo-sis-text-2-(800p).png');
+		<div id="logo" style="width: 100%;height: 150px;background-image: url('../css/images/logo-sis-text-2-(800p).png');
 background-repeat: no-repeat;
 background-size: contain;
 background-position: center center;
@@ -84,6 +80,6 @@ text-align: center;
 			</nav>
 
 		</div>
-		<script type="text/javascript" src="../js/headerSeguro.js">
+		<script src="../js/headerSeguro.js">
 </script>
 		<div class="row md-12" style="min-height: 800px;">

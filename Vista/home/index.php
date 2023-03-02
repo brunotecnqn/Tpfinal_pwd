@@ -10,26 +10,7 @@
         }
     ?>
 
-    <style type="text/css">
-        
-        .card{
-            float: left;
-            margin: 10px;
-        }
-        .card .contenedorimagen {
-            width: 100%;
-            height: 120px;
-            display: flex;
-            
-            justify-content: center;
-        }
-
-        .card-img-top {
-            width: 100%;
-            height: 140;
-            object-fit: contain;        
-        }
-    </style>
+<link rel="stylesheet" type="text/css" href="../css/estiloproductos.css">
     <?php
 
         $objCtrlProducto = new ABMproducto();
@@ -38,7 +19,7 @@
         $lista = $objCtrlProducto->buscar($param);
     ?>
 
-    <div class="container pt-2 pb-2">
+    <div class="row container d-flex flex-wrap justify-content-center">
 
             <?php
             foreach ($lista as $objProducto) {
@@ -70,27 +51,7 @@
             <?php } ?>
 
     </div>
-                <?php
-                /*
-                $objCtrlProducto=new ABMproducto();
-                $lista=$objCtrlProducto->buscar($param);
-                //print_r($lista);
-                foreach($lista as $objProducto)
-                {
-                ?>
-                <div class="card">
-                <h2><?php echo $objProducto->getPronombre();?></h2>
-                <div class="contenedorImg">
-                <img src="<?php echo $objProducto->getUrlimagen();?>" alt="imagen" class="imagen-producto">
-                </div>
-                <p class="precioProducto"><?php echo $objProducto->getPrecio(); ?>$</p>
-
-                        <a class="titulo" href="#" onclick=""><?php echo $objProducto->getProdetalle();?></a>
-                        <p class="stockProducto"> <?php echo $objProducto->getProcantstock(); ?> diponibles</p>
-                <p><button>Agregar</button></p>
-                </div>
-                */
-                ?>
+             
 
 
 
