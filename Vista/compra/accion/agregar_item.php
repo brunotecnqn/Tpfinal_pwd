@@ -17,7 +17,7 @@ $objCntrlCE = new ABMcompraestado();
 $objEstado = $objCntrlCE->verificarEstado($param);
 $retorno["seagrego"]=false;
 $retorno["seactualizo"]=false;
-//si hay una compra en confeccion
+//verifico si hay una compra en confeccion
 if ($objEstado != null) {
     //obtenemos el idcompra de a traves de la compra estado
     $idcompra = $objEstado->getObjCompra()->getIdcompra();

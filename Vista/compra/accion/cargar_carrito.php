@@ -156,10 +156,9 @@
             if (cantNueva != "") {
                 $.post('accion/cambiar_cantidad.php?idcompraitem=' + idcompraitem + '&cantNueva=' + cant + '&opc=' + opc,
                     function(result) {
-                        //     	 alert("Volvio Serviodr");  
-
+                       
                         if (result == 1) {
-                            //     window.location.href = window.location.href;
+                           
                             cargarCarrito();
 
 
@@ -173,7 +172,7 @@
                         }
                     }, 'json');
 
-                //alert('id:'+idcompraitem+',cant:'+cant+',opc:'+opc);
+          
 
             } else {
                 cargarCarrito();

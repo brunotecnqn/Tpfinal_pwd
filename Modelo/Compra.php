@@ -7,7 +7,7 @@ class Compra extends BaseDatos{
 
  public function __construct()
  {
-    $this->compra="";
+    $this->idcompra="";
     $this->cofecha="";
     $this->objUsuario=new Usuario();
 

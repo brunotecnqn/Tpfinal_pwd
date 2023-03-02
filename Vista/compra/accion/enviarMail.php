@@ -7,19 +7,18 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-$objAbmUsuario = new ABMUsuario();
-$param["idusuario"]=24;
-$listaUsuario=$objAbmUsuario->buscar($param);
-$objUsuario = $listaUsuario[0];
-enviarMail($objUsuario);
-function enviarMail($objUsuario)
+function enviarMail($objUsuario,$idcompra,$idcompraestadotipo)
 {
 $mail = new PHPMailer(true);
 
         try {
-        
+            
+            $objCtrlCET=new ABMcompraestadotipo();  
+            $param["idcompraestadotipo"]=$idcompraestadotipo;
+            $lista=$objCtrlCET->buscar($param);
+            $objCET=$lista[0];
             $emailCliente=$objUsuario->getusmail();
-            $estado="aceptada";
+            $estado=$objCET->getCetdescripcion();
             //Configuracion del servidor SMTP
             $mail->SMTPDebug = 0;
             $mail->isSMTP();
@@ -35,16 +34,18 @@ $mail = new PHPMailer(true);
             $mail->setFrom('br1uno01one@gmail.com', 'Empresa');
             //Destinatario
             $mail->addAddress($emailCliente, 'Cliente');
-            //Archivos adjuntos
+            //Archivos adjuntos(opcional, depende si esta disponible en el host)
             $mail->addAttachment('../../css/images/logo-sis-text-2-(800p).png', 'Comunicado');      
             $mail->isHTML(true);
-            $mail->Subject = 'Su compra ha sido '.$estado;
+            $mail->Subject = 'Nro. pedido:'.$idcompra.', su compra ha sido '.$estado;
             $mail->Body    = 'El estado de su compra cambio a ' .$estado; 
 
             $mail->send();
-           // echo 'El mensaje ha sido enviado correctamente';
+            $res ='El mensaje ha sido enviado correctamente';
         } catch (Exception $e) {
-           // echo "Ha ocurrido un error al enviar el mensaje: {$mail->ErrorInfo}";
+            $res="Ha ocurrido un error al enviar el mensaje: {$mail->ErrorInfo}";
         }
+        return $res;
     }
+
 ?>

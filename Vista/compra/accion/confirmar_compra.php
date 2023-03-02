@@ -13,6 +13,7 @@ $param["idusuario"]=$idusuario;
 $param["idcompraestadotipo"] = 0;
 $param["cefechafin"]="null";
 $objCntrlCE= new ABMcompraestado();
+//Verifico si tengo una compra con estado en confeccion
 $objEstado=$objCntrlCE->verificarEstado($param);
 
 $idcompra=-1;

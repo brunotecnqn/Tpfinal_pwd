@@ -24,7 +24,7 @@ function saveProduct(){
         success: function(result){
             var result = eval('('+result+')');
 
-            alert("Volvio Serviodr:"+result.respuesta); 
+          
            
             if (!result.respuesta){
                 $.messager.show({
@@ -33,7 +33,7 @@ function saveProduct(){
                 });
             } else {
                 
-            alert("cerramos ventana"); 
+           
            
                //cerramos el dialog
                 $('#dlg').dialog('close');

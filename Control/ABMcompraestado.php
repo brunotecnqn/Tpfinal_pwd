@@ -204,7 +204,7 @@ class ABMcompraestado
     public function buscar($param = null)
     {
         $where = " true ";
-      
+
         if ($param <> NULL) {
 
 
@@ -234,7 +234,7 @@ class ABMcompraestado
             }
         }
 
-       // echo "<br>" . $where;
+        // echo "<br>" . $where;
         $arreglo = CompraEstado::listar($where);
         //echo "Estoy en buscar \n";
         //print_r($arreglo);
@@ -243,42 +243,68 @@ class ABMcompraestado
     }
     public function verificarEstado($param)
     {
-        $objCompraEstado=null;
-        $arreCompraEstado=$this->buscar($param);
-        if(count($arreCompraEstado)==1)
-        {
-            $objCompraEstado=$arreCompraEstado[0];
+        $objCompraEstado = null;
+        $arreCompraEstado = $this->buscar($param);
+        if (count($arreCompraEstado) == 1) {
+            $objCompraEstado = $arreCompraEstado[0];
         }
         return $objCompraEstado;
     }
     public function cambiarEstado($datos)
     {
         $hoy = date("Y-m-d H:i:s");
-        $datos["cefechaini"]=$hoy;
-        $datos["cefechafin"]="null";
-       
-       $seagrego=false;
-       $seactualizo=false;
-       
-       
-       if (isset($datos["idcompra"])){
-           
-           
-          
-           $param["idcompraestado"]=$datos["idcompraestado"];  
-             
-           //agregamos el nuevo estado 
-           $seagrego = $this->alta($datos); 
-           //para actualizar asignamos la fecha fin del estado anterior 
-           //print_r($seactualizo);
-           $seactualizo = $this->modificacion($param);     
-             
-          
-       }       
-       $resultado["seagrego"]=$seagrego;
-       $resultado["seactualizo"]=$seactualizo;
+        $datos["cefechaini"] = $hoy;
+        $datos["cefechafin"] = "null";
 
-       return $resultado;
+        $seagrego = false;
+        $seactualizo = false;
 
+
+        if (isset($datos["idcompra"])) {
+
+
+
+            $param["idcompraestado"] = $datos["idcompraestado"];
+
+            //agregamos el nuevo estado 
+            $seagrego = $this->alta($datos);
+            //para actualizar asignamos la fecha fin del estado anterior 
+            //print_r($seactualizo);
+            $seactualizo = $this->modificacion($param);
+        }
+        $resultado["seagrego"] = $seagrego;
+        $resultado["seactualizo"] = $seactualizo;
+
+        return $resultado;
+    }
+    public function actualizarEstadoCompra($datos)
+    {
+        $respuesta=[];
+        if (isset($datos["idcompra"])) {
+
+
+        
+            $objCtrlCI = new ABMcompraitem();
+            $respuesta = $this->cambiarEstado($datos);
+            if ($datos["idcompraestadotipo"] == 4) {
+                $data["idcompra"] = $datos["idcompra"];
+                $objCtrlCI->devolverProductos($data);
+            }
+            $objAbmUsuario = new ABMUsuario();
+            $listaUsuario = $objAbmUsuario->buscar($datos);
+            $objUsuario = $listaUsuario[0];
+            //si la compra ya no esta en confeccion
+            if ($datos["idcompraestadotipo"] > 0) {
+                $retorno['msgMail'] = enviarMail($objUsuario, $datos["idcompra"], $datos["idcompraestadotipo"]);
+            }
+        } else {
+            $mensaje = "no se pudo concretar";
+        }
+        $retorno['respuesta'] = $respuesta["seagrego"];
+        $retorno['seactualizo'] = $respuesta["seactualizo"];
+        if (isset($mensaje)) {
+
+            $retorno['errorMsg'] = $mensaje;
+        }
     }
 }
