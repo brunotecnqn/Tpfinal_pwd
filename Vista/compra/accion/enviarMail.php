@@ -7,12 +7,13 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-function enviarMail($objUsuario,$idcompra,$idcompraestadotipo)
+function enviarMail($idcompra,$idcompraestadotipo)
 {
 $mail = new PHPMailer(true);
 
         try {
-            
+            $objSesion=new Session(); 
+          $objUsuario=$objSesion->getUsuario();
             $objCtrlCET=new ABMcompraestadotipo();  
             $param["idcompraestadotipo"]=$idcompraestadotipo;
             $lista=$objCtrlCET->buscar($param);

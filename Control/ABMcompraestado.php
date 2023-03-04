@@ -279,6 +279,7 @@ class ABMcompraestado
     }
     public function actualizarEstadoCompra($datos)
     {
+        
         $respuesta=[];
         if (isset($datos["idcompra"])) {
 
@@ -290,12 +291,9 @@ class ABMcompraestado
                 $data["idcompra"] = $datos["idcompra"];
                 $objCtrlCI->devolverProductos($data);
             }
-            $objAbmUsuario = new ABMUsuario();
-            $listaUsuario = $objAbmUsuario->buscar($datos);
-            $objUsuario = $listaUsuario[0];
             //si la compra ya no esta en confeccion
             if ($datos["idcompraestadotipo"] > 0) {
-                $retorno['msgMail'] = enviarMail($objUsuario, $datos["idcompra"], $datos["idcompraestadotipo"]);
+                $retorno['msgMail'] = enviarMail($datos["idcompra"], $datos["idcompraestadotipo"]);
             }
         } else {
             $mensaje = "no se pudo concretar";
@@ -306,5 +304,6 @@ class ABMcompraestado
 
             $retorno['errorMsg'] = $mensaje;
         }
+        return $retorno;
     }
 }

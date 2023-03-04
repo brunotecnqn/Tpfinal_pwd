@@ -5,20 +5,15 @@ require_once("enviarMail.php");
 
 
 $datos=data_submitted();
-$objSesion=new Session(); 
-$idusuario=$objSesion->getUsuario()->getIdusuario();
-$datos["idusuario"]=$idusuario;
-$respuesta=[];
-/*if (isset($datos["idcompra"])){
+
+//$respuesta=[];
+if (isset($datos["idcompra"])){
 
 $objCtrlCE=new ABMcompraestado();  
 $retorno= $objCtrlCE->actualizarEstadoCompra($datos);
 }
-else{
-    $retorno["respuesta"]=false;
-}*/
 
-
+/*
 
 if (isset($datos["idcompra"])){
     
@@ -55,5 +50,5 @@ if (isset($mensaje)){
 
 }
 
-
+*/
     echo json_encode($retorno);
