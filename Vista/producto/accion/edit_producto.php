@@ -5,8 +5,6 @@ $respuesta = false;
 if (isset($data['idproducto'])){
     $objC = new ABMproducto();
     $respuesta = $objC->modificacion($data);
-
-  //  $retorno['entra'] = "si entro";
 }
 $retorno['respuesta'] = $respuesta;
 if (!$respuesta){

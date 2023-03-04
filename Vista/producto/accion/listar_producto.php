@@ -18,7 +18,7 @@ foreach ($lista as $elem ){
     $nuevoElem["urlimagen"]=$elem->getUrlimagen();  
     array_push($arreglo_salida,$nuevoElem);
 }
-//verEstructura($arreglo_salida);
+
 echo json_encode($arreglo_salida,0,2);
 
 ?>
