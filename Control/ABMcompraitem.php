@@ -201,6 +201,11 @@ class ABMcompraitem
        
         return $arreglo;
     }
+      /**
+     * Agrega el primer producto en el carrito y genera la primer estado de la compra "En confeccion", sino incrementa la cantidad del item +1
+     * @param array $param
+     * @return array
+     */
     public function agregarProducto($param)
     {
 
@@ -254,6 +259,11 @@ class ABMcompraitem
         }
         return $resultado;
     }
+      /**
+     * Devuelve el stock de cada producto del carrito de compras
+     * @param array $data
+     * @return array
+     */
     public function devolverProductos($data)
     {
         //con el idcompra, obtenemos los items o productos comprados(objetos CompraItem) 
@@ -286,7 +296,11 @@ class ABMcompraitem
         }
         return $resultado;
     }
-
+  /**
+     * Modifica la cantidad del item modificado del carrito
+     * @param array $param
+     * 
+     */
 
     function cambiarCantidadItem2($param)
     {
