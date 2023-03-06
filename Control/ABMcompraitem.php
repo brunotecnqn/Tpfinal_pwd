@@ -196,12 +196,9 @@ class ABMcompraitem
             if (isset($param['cicantidad']))
                 $where .= " and cicantidad =" . $param['cicantidad'];
         }
-        //print_r($where);
-        //echo "<br>";
+        
         $arreglo = CompraItem::listar($where);
-        //echo "Estoy en buscar \n";
-        //print_r($arreglo);
-
+       
         return $arreglo;
     }
     public function agregarProducto($param)
@@ -359,6 +356,7 @@ class ABMcompraitem
                 break;
         }
         if ($res) {
+            //modificamos la cantidad del item del carrito
             $resultado = $this->modificacion($param);
         }
 

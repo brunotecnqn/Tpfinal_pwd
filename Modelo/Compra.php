@@ -124,23 +124,7 @@ class Compra extends BaseDatos{
    }
    return $resp;
  }
-/*
- public function modificar() {
-   $resp = false;
-   $base = new BaseDatos();
-   $sql = "UPDATE compra SET cofecha = '".$this->getCofecha()."', idusuario = ".$this->getObjUsuario()->getIdusuario()." WHERE idcompra = ".$this->getIdcompra()."";
-   if ($base->Iniciar()) {
-     if ($base->Ejecutar($sql)) {
-       $resp = true;
-     } else {
-       $this->setmensajeoperacion("Compra->modificar: ".$base->getError());
-     }
-   } else {
-     $this->setmensajeoperacion("Compra->modificar: ".$base->getError());
-   }
-   return $resp;
- }
-*/
+
  public function eliminar() {
    $resp = false;
    $base = new BaseDatos();

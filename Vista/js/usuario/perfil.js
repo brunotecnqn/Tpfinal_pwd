@@ -35,13 +35,13 @@ function actualizar() {
           });
 
         } else {
-          //alert("se registro correctamente")
+          
           $.messager.alert({
             title: 'Mensaje',
             msg: "se actualizo correctamente"
           });
           window.location.href = window.location.href;
-        //  document.getElementById("usmail").value ="";  
+       
          
         }
       }

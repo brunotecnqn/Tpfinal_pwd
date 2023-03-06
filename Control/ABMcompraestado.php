@@ -234,10 +234,8 @@ class ABMcompraestado
             }
         }
 
-        // echo "<br>" . $where;
         $arreglo = CompraEstado::listar($where);
-        //echo "Estoy en buscar \n";
-        //print_r($arreglo);
+
 
         return $arreglo;
     }
@@ -269,7 +267,7 @@ class ABMcompraestado
             //agregamos el nuevo estado 
             $seagrego = $this->alta($datos);
             //para actualizar asignamos la fecha fin del estado anterior 
-            //print_r($seactualizo);
+
             $seactualizo = $this->modificacion($param);
         }
         $resultado["seagrego"] = $seagrego;
@@ -277,14 +275,52 @@ class ABMcompraestado
 
         return $resultado;
     }
+    public function confirmarCompra($datos)
+    {
+        $objSesion = new Session();
+        $idusuario = $objSesion->getUsuario()->getIdusuario();
+
+        $respuesta = [];
+
+        $param["idusuario"] = $idusuario;
+        $param["idcompraestadotipo"] = 0;
+        $param["cefechafin"] = "null";
+
+        //Verifico si tengo una compra con estado en confeccion
+        $objEstado = $this->verificarEstado($param);
+
+        $idcompra = -1;
+        $idcompraestado = -1;
+
+        if ($objEstado != null) {
+            $idcompra = $objEstado->getObjCompra()->getIdcompra();
+            $idcompraestado = $objEstado->getIdcompraestado();
+        }
+        if ($idcompra != -1) {
+            $datos["idusuario"] = $idusuario;
+            $datos["idcompraestado"] = $idcompraestado;
+            $datos["idcompra"] = $idcompra;
+
+            $respuesta = $this->cambiarEstado($datos);
+        } else {
+            $mensaje = "no se pudo concretar";
+        }
+        $retorno['respuesta'] = $respuesta["seagrego"];
+        $retorno['seactualizo'] = $respuesta["seactualizo"];
+        if (isset($mensaje)) {
+
+            $retorno['errorMsg'] = $mensaje;
+        }
+        return $retorno;
+    }
     public function actualizarEstadoCompra($datos)
     {
-        
-        $respuesta=[];
+
+        $respuesta = [];
         if (isset($datos["idcompra"])) {
 
 
-        
+
             $objCtrlCI = new ABMcompraitem();
             $respuesta = $this->cambiarEstado($datos);
             if ($datos["idcompraestadotipo"] == 4) {
@@ -307,3 +343,4 @@ class ABMcompraestado
         return $retorno;
     }
 }
+?>

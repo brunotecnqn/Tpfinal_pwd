@@ -15,6 +15,7 @@
 
                     <div class="product">
                         <div class="row">
+                        
                             <div class="col-md-3 d-flex">
                                 <img src="<?php echo $item->getObjProducto()->getUrlimagen(); ?>" class="img-fluid mx-auto d-flex image">
                             </div>
@@ -64,14 +65,14 @@
                 <?php
 
                 $param["idcompra"] = $datos["idcompra"];
-                $param["idcompraestadotipo"] = 2;
+                $param["idcompraestadotipo"] = 2;//aceptada
                 $objCntrlCE = new ABMcompraestado();
                 $objEstado1 = $objCntrlCE->verificarEstado($param);
                 $param2["idcompra"] = $datos["idcompra"];
-                $param2["idcompraestadotipo"] = 3;
+                $param2["idcompraestadotipo"] = 3;//enviada
                 $objEstado2 = $objCntrlCE->verificarEstado($param2);
                 $param3["idcompra"] = $datos["idcompra"];
-                $param3["idcompraestadotipo"] = 4;
+                $param3["idcompraestadotipo"] = 4;//cancelada
                 $objEstado3 = $objCntrlCE->verificarEstado($param3);
                 if ($objEstado1==null&&$objEstado2==null&&$objEstado3==null) {
                 ?>

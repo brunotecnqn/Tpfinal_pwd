@@ -51,13 +51,9 @@
                                         </div>
                                         <div class="col-md-4 d-flex align-items-start">
 
-                                            <!--<button class="btn btn-dark" onclick="cambiarCantidad(<?php //echo  $item->getIdcompraitem(); ?>,1,2);"><i class="bi bi-dash"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
-                                                        <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
-                                                    </svg></i></button>-->
-                                            <input type="tel"pattern="^[0-9_.-]*$" style="min-width:30px;" value="<?php echo $item->getCicantidad(); ?>" class="cantidad form-control quantity-input text-center" onchange="intercambiarCantidad(<?php echo  $item->getIdcompraitem(); ?>,this.value,3);" required>
-                                            <!--<button class="btn btn-dark" onclick="cambiarCantidad(<?php // echo  $item->getIdcompraitem(); ?>,1,1);"><i class="bi bi-plus"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                                    </svg></i></button>-->
+                                       
+                                            <input type="tel"pattern="^[0-9_.-]*$" style="min-width:30px;" value="<?php echo $item->getCicantidad(); ?>" class="cantidad form-control quantity-input text-center" onchange="cambiarCantidad(<?php echo  $item->getIdcompraitem(); ?>,this.value,3);" required>
+                                        
                                         </div>
                                         <div class="col-md-2 text-success fw-bold">
                                             <span><?php echo $item->getObjProducto()->getPrecio(); ?>$</span>
@@ -117,43 +113,8 @@
             if (cantNueva != "") {
                 $.post('accion/cambiar_cantidad.php?idcompraitem=' + idcompraitem + '&cantNueva=' + cant + '&opc=' + opc,
                     function(result) {
-                        //     	 alert("Volvio Serviodr");  
+                   
 
-                        if (result == 1) {
-                            //     window.location.href = window.location.href;
-                            cargarCarrito();
-
-
-                        } else {
-
-                            cargarCarrito();
-                            /* $.messager.show({ // show error message
-                               title: 'Error',
-                               msg: "No dispone de esa cantidad"
-                             });*/
-                        }
-                    }, 'json');
-
-                //alert('id:'+idcompraitem+',cant:'+cant+',opc:'+opc);
-
-            } else {
-                cargarCarrito();
-
-            }
-        }
-        function intercambiarCantidad(idcomprai, cantNueva, opcion) {
-            var idcompraitem = parseInt(idcomprai);
-            var cant = parseInt(cantNueva);
-            var opc = parseInt(opcion);
-            if(cant==0)
-            {
-               cant=1;
-            }
-            
-            if (cantNueva != "") {
-                $.post('accion/cambiar_cantidad.php?idcompraitem=' + idcompraitem + '&cantNueva=' + cant + '&opc=' + opc,
-                    function(result) {
-                       
                         if (result == 1) {
                            
                             cargarCarrito();
@@ -162,18 +123,16 @@
                         } else {
 
                             cargarCarrito();
-                            /* $.messager.show({ // show error message
-                               title: 'Error',
-                               msg: "No dispone de esa cantidad"
-                             });*/
+                          
                         }
                     }, 'json');
 
-          
+              
 
             } else {
                 cargarCarrito();
 
             }
         }
+     
     </script>

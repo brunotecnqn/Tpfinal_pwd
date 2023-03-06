@@ -17,26 +17,19 @@ class ABMmenurol{
             $objMenurol=null;
             if (isset($datos['idmenu'])) {
                 $arraymenurol= ['idmenu' => $datos['idmenu']];
-                //print_r($arraymenurol);
+     
                 $objMenurol = $this->buscar($arraymenurol);
-                //echo "<br>objMenurol me devuelve de buscar : <br>";
-                //print_r($objMenurol);
+           
             }
             if ($objMenurol == null) {
-                // $mensajeResultado = $this->verificarUsuarioMail($datos);
-                //print_r($datos);
-                //print_r($mensajeResultado['Resultado']);
-                //if ($mensajeResultado==null) {
+              
                     if (isset($datos['accion'])) {
-                        //echo $datos['accion'];
-                       // print_r($datos);
+                   
                         if ($this->alta($datos)) {
                             $resp = true;
                         }
                     }
-                    /*} else {
-                        echo $mensajeResultado['Mensaje'];
-                    }*/
+                  
             }
             else {
                 echo "El correo electrónico ya esta registrado";
@@ -106,13 +99,13 @@ class ABMmenurol{
         $resp = false;
         if (isset($param['idmenu']))
             $resp = true;
-        //echo "SeteadosCamposClaves". $resp;
+     
         return $resp;
      }
      public function alta($param){
-        //print_r($param);
+     
         $resp = false;
-        //$param['idmenu']=null;
+        
 
         $elObjmenurol = $this->cargarObjeto($param);
         if ($elObjmenurol!=null and $elObjmenurol->insertar()){
@@ -145,7 +138,7 @@ class ABMmenurol{
         $resp = false;
         if($this->seteadosCamposClaves ($param)){
             $elObjmenurol = $this->cargarObjeto($param);
-            //print_r($param);
+            
             if($elObjmenurol!=null and $elObjmenurol->modificar()){
                 $resp = true;
             }
@@ -159,24 +152,16 @@ class ABMmenurol{
      */
     public function buscar($param){
         $where = " true ";
-        //echo "Este dato ingresa a Buscar en ABMusuario";
-        
-        //print_r($param);
-        //echo "<br>";
-        //print_r ($param['usmail']);
-        if($param<>NULL){
+            if($param<>NULL){
             if(isset($param['idmenu'])) 
                 $where.=" and idmenu = ".$param['idmenu'];
             if (isset($param['idrol']))
                 $where .= " and idrol = ".$param['idrol'];
             
         }
-        //print_r($where);
-        //echo "<br>";
+
         $arreglo = MenuRol::listar($where);
-        //echo "Estoy en buscar \n";
-        //print_r($arreglo);
-    
+     
         return $arreglo;
        }
       
