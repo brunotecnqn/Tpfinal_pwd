@@ -275,6 +275,11 @@ class ABMcompraestado
 
         return $resultado;
     }
+       /**
+     * verifica el estado de la compra y cambia el estado de la compra a iniciado
+     * @param array $param
+     * @return array
+     */
     public function confirmarCompra($datos)
     {
         $objSesion = new Session();
@@ -300,8 +305,22 @@ class ABMcompraestado
             $datos["idusuario"] = $idusuario;
             $datos["idcompraestado"] = $idcompraestado;
             $datos["idcompra"] = $idcompra;
+            /////////////////////////////////////
+            $data["idcompra"] = $idcompra;
+            $objControlCI=new ABMcompraitem();
+            $arre=$objControlCI->buscar($data);
+            $cant=count($arre);
 
+            ///////////////////////////////
+            //Verificamos que hayan items en el carrito
+            if($cant>0)
+            {
             $respuesta = $this->cambiarEstado($datos);
+            }
+            else{
+                $respuesta["seagrego"]=false;
+                $respuesta["seactualizo"]=false;
+            }
         } else {
             $mensaje = "no se pudo concretar";
         }
@@ -313,6 +332,11 @@ class ABMcompraestado
         }
         return $retorno;
     }
+       /**
+     * Cambia el estado de la compra
+     * @param array $datos
+     * @return array
+     */
     public function actualizarEstadoCompra($datos)
     {
 

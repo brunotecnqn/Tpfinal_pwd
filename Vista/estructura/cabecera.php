@@ -49,10 +49,7 @@ $dir = "";
     <div class="row">
         <nav class="navbar navbar-expand-md navbar-dark bg-primary">
             <div class="container-fluid">
-                <!--<a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>-->
+        
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
@@ -66,25 +63,18 @@ $dir = "";
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="../login/index.php">Iniciar Sesi&oacute;n</a></li>
                                 <li><a class="dropdown-item" href="../usuario/registrarseB.php">Registrarse</a></li>
-                               <!-- <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Algo más aquí</a></li>
+                              
 --></ul>
                         </li>
             
 
                     </ul>
-              <!--      <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
-                        <button class="btn btn-outline-success bg-dark" type="submit">Buscar</button>
-                    </form>-->
+       
                 </div>
             </div>
         </nav>
     
-        <!--<div data-options="region:'west',split:true,title:'West'" style="width:150px;padding:10px;">west content</div>-->
-        <!--<div data-options="region:'east',split:false,collapsed:true,title:'Perfil'" style="width:200px;padding:10px;height: auto;"> Datos de usuario</div>-->
+
 
     </div>
 

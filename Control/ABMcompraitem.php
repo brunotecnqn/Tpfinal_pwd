@@ -297,7 +297,7 @@ class ABMcompraitem
         return $resultado;
     }
   /**
-     * Modifica la cantidad del item modificado del carrito
+     * actualiza la cantidad del item del carrito
      * @param array $param
      * 
      */
@@ -376,6 +376,11 @@ class ABMcompraitem
 
         return $resultado;
     }
+      /**
+     * Elimina el item del carrito y devuelve su cantidad al stock del producto
+     * @param array $param
+     * @return array
+     */
     function eliminarItem($datos)
     {
         $respuesta = false;

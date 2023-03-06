@@ -100,11 +100,7 @@ class ABMcompra{
      */
     public function buscar($param){
         $where = " true ";
-        //echo "Este dato ingresa a Buscar en ABMusuario";
-        
-        //print_r($param);
-        //echo "<br>";
-        //print_r ($param['usmail']);
+       
         if($param<>NULL){
             if(isset($param['idcompra'])) 
                 $where.=" and idcompra = ".$param['idcompra'];
@@ -119,7 +115,7 @@ class ABMcompra{
     
         return $arreglo;
        }
-      /* En este metodo se agregar el primer item  y se genera la compra en confección, sino se incrementa la cantidad del item +1*/
+      /* En este metodo se agregar el primer item  y se genera la compra con estado en confección, sino se incrementa la cantidad del item +1*/
    function agregarItem($valores)
    {
     $cantidad = $valores["cicantidad"];
@@ -183,5 +179,3 @@ class ABMcompra{
   return $retorno;
    }
 }
-
-?>
