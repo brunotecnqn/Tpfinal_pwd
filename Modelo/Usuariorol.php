@@ -71,7 +71,7 @@ class UsuarioRol extends BaseDatos
         $sql="INSERT INTO usuariorol(idrol,idusuario)  VALUES(".$this->getobjrol()->getidrol().",".$this->getobjusuario()->getidusuario().");";
         if ($this->Iniciar()) {
             if ($elid = $this->Ejecutar($sql)) {
-               // $this->setidrol($elid);
+               
                 $resp = true;
             } else {
                 $this->setmensajeoperacion("Especie->insertar: ".$this->getError());

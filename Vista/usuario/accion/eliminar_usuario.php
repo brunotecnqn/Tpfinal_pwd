@@ -1,20 +1,11 @@
 <?php
 include_once "../../../configuracion.php";
 $data = data_submitted();
-
-if (isset($data['idusuario'])){
-    $objC = new ABMUsuario();
-    $respuesta = $objC->bajaLogica($data);
-    if (!$respuesta){
-        $mensaje = " La accion  DESHABILITACIÓN No pudo concretarse";
-    }
-}
-
+$objC = new ABMUsuario();
+$respuesta = $objC->bajaLogica($data);
 $retorno['respuesta'] = $respuesta;
-if (isset($mensaje)){
-   
-    $retorno['errorMsg']=$mensaje;
-
+if (!$respuesta) {
+    $retorno['errorMsg'] = "No se pudo eliminar al usuario";
 }
-    echo json_encode($retorno);
+echo json_encode($retorno);
 ?>

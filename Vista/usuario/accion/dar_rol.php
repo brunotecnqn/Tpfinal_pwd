@@ -1,30 +1,12 @@
 <?php 
 include_once "../../../configuracion.php";
 $data = data_submitted();
-//$data['idusuario']=1;
-//$data['idrol']=2;
-$respuesta = false;
-if (isset($data['idusuario'])){
-        $objC = new ABMUsuario();
-
-        //le asignamos rol de cliente
-       // $datos["idrol"]=2; 
-        $objUsuario = $objC->alta_rol($data);
-        if ($objUsuario==null){
-            $mensaje = " La accion  DAR ROL No pudo concretarse";
-            
-        }
-        else{
-            
-                $respuesta=true;
-             
-         
-        }
-}
+$objC = new ABMUsuario();
+$respuesta = $objC->alta_rol($data);
 $retorno['respuesta'] = $respuesta;
-if (isset($mensaje)){
+if (!$respuesta){
     
-    $retorno['errorMsg']=$mensaje;
+    $retorno['errorMsg']="No se pudo asignar el rol";
    
 }
  echo json_encode($retorno);

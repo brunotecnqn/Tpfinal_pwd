@@ -77,12 +77,16 @@ class ABMUsuario{
             $resp = true;            
         return $resp;
     }
-    
+      /**
+     * permite registrar a un usuario. 
+     * @param array $param
+     * @return Usuario
+     */
     public function alta($param){
         $resp = null;
         $param['idusuario'] =null;
         $elObjtUsuario = $this->cargarObjeto($param);
-//        verEstructura($elObjtTabla);
+
         if ($elObjtUsuario!=null and $elObjtUsuario->insertar()){
             $resp = $elObjtUsuario;
             
@@ -90,7 +94,11 @@ class ABMUsuario{
         return $resp;
         
     }
-
+  /**
+     * permite quitar un rol a un usuario. 
+     * @param array $param
+     * @return boolean
+     */
     public function borrar_rol($param){
         $resp = false;
         if(isset($param['idusuario']) && isset($param['idrol'])){
@@ -103,7 +111,11 @@ class ABMUsuario{
         return $resp;
         
     }
-
+      /**
+     * permite asignar un rol a un usuario. 
+     * @param string $param
+     * @return
+     */
     public function alta_rol($param){
         $resp = false;
         if(isset($param['idusuario']) && isset($param['idrol'])){
@@ -118,7 +130,7 @@ class ABMUsuario{
         
     }
     /**
-     * permite eliminar un objeto 
+     * permite realizar el borrado logico de un usuario. 
      * @param array $param
      * @return boolean
      */
@@ -135,14 +147,12 @@ class ABMUsuario{
     }
     
     /**
-     * permite modificar un objeto
+     * permite modificar un usuario
      * @param array $param
      * @return boolean
      */
     public function modificacion($param){
-       // echo "Estoy en modificacion";
-       
-        $resp = false;
+           $resp = false;
         if ($this->seteadosCamposClaves($param)){
             $elObjtUsuario = $this->cargarObjeto($param);            
             if($elObjtUsuario!=null and $elObjtUsuario->modificar("")){
@@ -151,7 +161,11 @@ class ABMUsuario{
         }       
         return $resp;
     }
-
+ /**
+     * Retorna un lista de objetos UsuarioRol
+     * @param array $param
+     * @return array
+     */
     public function darRoles($param){
         $where = " true ";
         if ($param<>NULL){
@@ -168,8 +182,8 @@ class ABMUsuario{
 
     
     /**
-     * permite buscar un objeto
-     * @param array $param
+     * permite buscar y listar uno o mas objetos Usuario
+     * @param string $param
      * @return array
      */
     public function buscar($param){
@@ -186,11 +200,32 @@ class ABMUsuario{
             if  (isset($param['usdeshabilitado']))
                  $where.=" and usdeshabilitado ='".$param['usdeshabilitado']."'";
         }
-        $obj = new Usuario();
-        $arreglo = $obj->listar($where);
-        //echo "Van ".count($arreglo);
+        //$obj = new Usuario();
+        $arreglo = Usuario::listar2($where);
+       
         return $arreglo;
     }
-    
+     /**
+     * Permite registrar a un nuevo usuario, automaticamente se le asigna el rol de cliente
+     * @param array $data
+     * @return boolean
+     */
+    function registrarUsuario($data)
+    {
+        $respuesta = false;
+        if (isset($data['usnombre'])) {
+            $objC = new ABMUsuario();
+            $objUsuario = $objC->alta($data);
+            if ($objUsuario != null) {
+
+
+                $datos["idusuario"] = $objUsuario->getidusuario();
+                //le asignamos rol de cliente
+                $datos["idrol"] = 2;
+                $respuesta = $objC->alta_rol($datos);
+            }
+        }
+        return $respuesta;
+    }
 }
 ?>

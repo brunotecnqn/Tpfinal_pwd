@@ -21,7 +21,7 @@ var jqxhr = $.post('accion/dar_rol.php?idrol='+idrol+"&idusuario="+idusuario, fu
    } else {
      $.messager.alert({
        title: 'Mensaje',
-       msg: " se asignó nuevo rol true:"+result.respuesta
+       msg: " se asignó nuevo rol"
      });
      cargarRoles();
     //window.location.href = window.location.href;

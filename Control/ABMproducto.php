@@ -71,14 +71,13 @@ class ABMproducto
     public function alta($param)
     {
         $resp = false;
-        /*if (array_key_exists('idproducto', $param)) {
-        $param['idproducto'] = null;
-        }*/
+        if (isset($param['pronombre'])&&isset($param['tipo'])){
         $param['idproducto'] = null;
         $elObjProducto = $this->cargarObjeto($param);
         if ($elObjProducto != null and $elObjProducto->insertar()) {
             $resp = true;
         }
+    }
         return $resp;
     }
     /**
@@ -86,17 +85,7 @@ class ABMproducto
      * @param array $param
      * @return boolean
      */
-    //consideramos poner stock en 0
-    /*public function bajaLogica($param){
-        $resp = false;
-        if ($this->seteadosCamposClaves($param)){
-            $elObjProducto = $this->cargarObjetoConClave($param);
-            if($elObjProducto!=null and $elObjProducto->modificar($param)){
-                $resp = true;
-            }
-        }
-        return $resp;
-    }*/
+  
     /**
      * permite modificar un objeto
      * @param array $param

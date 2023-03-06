@@ -127,12 +127,12 @@ class Producto extends BaseDatos{
         return $resp;
     }
     
-    public function modificar($tipo=""){
-       // print_r($tipo);
+    public function modificar(){
+     
         $resp = false;
         $base = new BaseDatos();
       
-            $sql = "UPDATE producto SET pronombre = '".$this->getPronombre()."',prodetalle = '".$this->getProdetalle()."',procantstock = ".$this->getProcantstock()." WHERE idproducto = ". $this->getIdproducto()."";
+            $sql = "UPDATE producto SET pronombre = '".$this->getPronombre()."',prodetalle = '".$this->getProdetalle()."',procantstock = ".$this->getProcantstock().",precio=".$this->getPrecio().",tipo='".$this->getTipo()."',urlimagen='".$this->getUrlimagen()."' WHERE idproducto = ". $this->getIdproducto()."";
         
         if ($base->Iniciar()){
             if ($base->Ejecutar($sql)){
@@ -177,9 +177,9 @@ class Producto extends BaseDatos{
         return $arreglo;
     }
     /**
-   * Recupera los datos de la persona por numero de documento
+   * Carga los datos de un objeto Producto
    * @param int idproducto
-   * @return array en caso de encontrar los datos, false en caso contrario 
+   * @return boolean
    */
     public function buscar($idproducto){
         $base = new BaseDatos();
@@ -196,15 +196,8 @@ class Producto extends BaseDatos{
                     $this->setTipo($row['tipo']);
                     $this->setPrecio($row['precio']);
                     $this->setUrlimagen($row['urlimagen']);
-                    /*if($row['usdeshabilitado']=="0000-00-00 00:00:00"){
-                        $usdeshab="habilitado";
-                    }else{
-                        $usdeshab="deshabilitado";
-                    }
-                    
-                    $this->setUsdeshabilitado($usdeshab);*/
                     $resp = true;
-                    //echo $resp. "en buscar";
+               
                 }
             }else{
                 $this->setmensajeoperacion($base->getError());
