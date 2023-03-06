@@ -149,6 +149,11 @@ class CompraEstadoTipo extends BaseDatos{
         return $resp;
     }
 
+   /**
+     * Retorna una lista de objetos CompraEstadoTipo
+     * @param String $parametro
+      * @return Array  
+     */
     public static function listar($parametro = "") {
         $arreglo = array();
         $base = new BaseDatos();

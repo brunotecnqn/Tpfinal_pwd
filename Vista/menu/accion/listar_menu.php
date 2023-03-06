@@ -17,7 +17,7 @@ foreach ($list as $elem ){
    
     array_push($arreglo_salida,$nuevoElem);
 }
-//verEstructura($arreglo_salida);
+
 echo json_encode($arreglo_salida,0,2);
 
 ?>

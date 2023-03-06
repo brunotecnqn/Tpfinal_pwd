@@ -1,20 +1,12 @@
 <?php
 include_once "../../../configuracion.php";
 $data = data_submitted();
+$objC = new AbmMenu();
+$respuesta = $objC->bajaLogica($data);
+if (!$respuesta) {
 
-if (isset($data['idmenu'])){
-    $objC = new AbmMenu();
-    $respuesta = $objC->bajaLogica($data);
-    if (!$respuesta){
-        $mensaje = " La accion  ELIMINACION No pudo concretarse";
-    }
+    $retorno['errorMsg'] ="No se pudo eliminar el menu";
 }
-
 $retorno['respuesta'] = $respuesta;
-if (isset($mensaje)){
-   
-    $retorno['errorMsg']=$mensaje;
-
-}
-    echo json_encode($retorno);
+echo json_encode($retorno);
 ?>

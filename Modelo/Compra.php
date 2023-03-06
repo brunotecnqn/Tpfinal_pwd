@@ -80,6 +80,10 @@ class Compra extends BaseDatos{
    $this->setObjUsuario($objUsuario);
  }
 
+   /**
+     * carga los datos del objeto compra.
+      * @return Boolean  
+     */
  public function cargar() {
    $resp = false;
    $base = new BaseDatos();
@@ -93,7 +97,7 @@ class Compra extends BaseDatos{
          $objUsuario = new Usuario();
          $objUsuario->setIdusuario($row['idusuario']);
          $objUsuario->cargar();
-
+         $resp=true;
          $this->setear($row['idcompra'], $row['cofecha'], $objUsuario);
        }
      }
@@ -152,7 +156,12 @@ class Compra extends BaseDatos{
    }
    return $resp;
  }
-
+   /**
+     * Retorna una lista de objetos Compra
+     * @param String $parametro
+      * @return Array  
+     */
+    
  public static function listar($parametro = "") {
    $arreglo = array();
    $base = new BaseDatos();
@@ -181,6 +190,11 @@ class Compra extends BaseDatos{
    return $arreglo;
  }
 
+   /**
+     * Busca una Compra a traves de su idcompra, y carga sus datos
+     * @param Int $idcompra
+      * @return boolean  
+     */
  public function buscar($idcompra)
  {
    $base = new BaseDatos();

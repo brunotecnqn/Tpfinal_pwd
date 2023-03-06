@@ -87,10 +87,7 @@
 
 
                 <button type="button" onclick="comprar('La compra se realizo correctamente!',1)" class="btn btn-primary btn-lg btn-block">Comprar</button>
-                <!--
-              <button type="button" onclick="cambiarEstado()" class="btn btn-warning btn-lg btn-block">Cambiar estado</button>
-              <button type="button" onclick="enviarDatos()" class="btn btn-warning btn-lg btn-block">Enviar datos</button>
-                -->
+            
             </div>
         </div>
     </div>

@@ -6,6 +6,8 @@ class BaseDatos extends PDO {
     private $database;
     private $user;
     private $pass;
+    private $error;
+    private $sql;
   	private $debug;
   	private $conec;
   	private $indice;

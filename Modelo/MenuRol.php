@@ -75,6 +75,11 @@ class MenuRol{
         }
         return $resp;
       }
+       /**
+     * le asigna un nuevo rol o permiso al menu
+     * 
+      * @return boolean 
+     */
     
       public function insertar() {
         $resp = false;
@@ -95,7 +100,7 @@ class MenuRol{
       }
     
       /**
-       * Este metodo sirve para modificar el rol que puede usar esta opcion de menu
+       * Este metodo sirve para modificar el rol usuario que puede usar esta opcion de menu
        * @return void
        */
       public function modificar() {
@@ -113,6 +118,11 @@ class MenuRol{
         }
         return $resp;
       }
+       /**
+     * Elimina un objeto MenuRol
+     * 
+      * @return boolean  
+     */
     
       public function eliminar() {
         $resp = false;
@@ -129,6 +139,11 @@ class MenuRol{
         }
         return $resp;
       }
+     /**
+     * Retorna una lista de objetos MenuRol
+     * @param String $parametro
+      * @return Array  
+     */
     
       public static function listar($parametro = "") {
         $arreglo = array();

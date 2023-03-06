@@ -159,7 +159,7 @@ public function cargar() {
     $base = new BaseDatos();
     $sql = "INSERT INTO compraestado (idcompra, idcompraestadotipo, cefechaini, cefechafin,idusuario) VALUES (".$this->getObjcompra()->getIdcompra().",". $this->getObjcompraestadotipo()->getIdcompraestadotipo().",{$fechainicio},{$this->getCefechafin()},{$this->getObjUsuario()->getidusuario()})";
  
- //   echo $sql;
+ 
     if ($base->Iniciar()) {
       if ($id = $base->Ejecutar($sql)) {
         $this->setIdcompraestado($id);
@@ -177,12 +177,12 @@ public function cargar() {
     $resp = false;
     $base = new BaseDatos();
     $hoy=date("Y-m-d H:i:s");
-    //$fecha="'$hoy'";
+    
     $sql = "UPDATE compraestado SET 
            cefechafin= '$hoy'  
       WHERE idcompraestado = ".$this->getIdCompraestado()."";
 
-    //echo $sql;
+  
     if ($base->Iniciar()) {
 
       if ($base->Ejecutar($sql)) {
@@ -200,6 +200,11 @@ public function cargar() {
     return $resp;
   }
 
+   /**
+     * Retorna una lista de objetos CompraEstado
+     * @param String $parametro
+      * @return Array  
+     */
   
   public static function listar($parametro = "") {
     $arreglo = array();

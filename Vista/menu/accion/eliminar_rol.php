@@ -1,33 +1,10 @@
-<?php 
+<?php
 include_once "../../../configuracion.php";
 $data = data_submitted();
-//$data['idusuario']=1;
-//$data['idrol']=2;
-$respuesta = false;
-if (isset($data['idmenu'])){
-        $objC = new AbmMenu();
-
-        //le asignamos rol de cliente
-       // $datos["idrol"]=2; 
-        $objMenu = $objC->borrar_rol($data);
-        if ($objMenu==null){
-            $mensaje = " La accion  DAR ROL No pudo concretarse";
-            
-        }
-        else{
-            
-                $respuesta=true;
-             
-         
-        }
+$objC = new AbmMenu();
+$respuesta = $objC->borrar_rol($data);
+$retorno["respuesta"]=$respuesta;
+if(!$respuesta){
+    $retorno['errorMsg'] = "No se pudo eliminar el rol";
 }
-$retorno['respuesta'] = $respuesta;
-if (isset($mensaje)){
-    
-    $retorno['errorMsg']=$mensaje;
-   
-}
- echo json_encode($retorno);
-?>
-
-
+echo json_encode($retorno);

@@ -20,6 +20,8 @@ class AbmMenu
                 $objmenu->setIdmenu($param['idpadre']);
                 $objmenu->cargar();
             }
+            else{$objmenu=null;}
+            
             if (!isset($param['medeshabilitado'])) {
                 $param['medeshabilitado'] = null;
             } else {
@@ -68,12 +70,14 @@ class AbmMenu
     public function alta($param)
     {
         $resp = false;
-        $param['idmenu'] = null;
-        $param['medeshabilitado'] = null;
-        $elObjtTabla = $this->cargarObjeto($param);
-        //        verEstructura($elObjtTabla);
-        if ($elObjtTabla != null and $elObjtTabla->insertar()) {
-            $resp = true;
+        if (isset($param['menombre'])) {
+            $param['idmenu'] = null;
+            $param['medeshabilitado'] = null;
+            $elObjtTabla = $this->cargarObjeto($param);
+            //        verEstructura($elObjtTabla);
+            if ($elObjtTabla != null and $elObjtTabla->insertar()) {
+                $resp = true;
+            }
         }
         return $resp;
     }
@@ -218,7 +222,7 @@ class AbmMenu
         if (count($objUsuroles) > 0) {
             foreach ($objUsuroles as $objUsuarioRol) {
                 $arre["idrol"] = $objUsuarioRol->getObjRol()->getidrol();
-               
+
                 $arreM = $this->listarMenus($arre);
                 $res = [];
                 foreach ($arreM as $objmenurol) {
