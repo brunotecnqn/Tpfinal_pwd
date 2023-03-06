@@ -7,8 +7,7 @@ function registrar() {
     document.getElementById("uspass").value = passhash;
     document.getElementById("password").value = "";
     $("#ff").form("submit", {
-      //url:'accion/alta_usuario.php',
-      url: "accion/alta_usuario.php",
+          url: "accion/alta_usuario.php",
       onSubmit: function () {
         return $(this).form("validate");
       },
@@ -29,13 +28,15 @@ function registrar() {
           $("#usmail").removeClass("is-valid");
           $("#usnombre").removeClass("is-valid");
           $("#password").removeClass("is-valid");
-          
+          $("#usmail").removeClass("is-invalid");
+          $("#usnombre").removeClass("is-invalid");
+          $("#password").removeClass("is-invalid");
          
           document.getElementById("usmail").value = "";
           document.getElementById("usnombre").value = "";
           setTimeout(function(){
             window.location.href = "../login/index.php";
-          }, 800);
+          }, 1200);
           
         }
       },
@@ -65,7 +66,7 @@ function validarNombre() {
   var txtnombre = $("#usnombre").val();
 
   //Comprobamos la longitud de caracteres
-  if (txtnombre.length >= 3 && txtnombre.length <= 25) {
+  if (txtnombre.length >= 3 && txtnombre.length <= 20) {
     res = true;
     $("#usnombre").removeClass("is-invalid");
     $("#usnombre").addClass("is-valid");

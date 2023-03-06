@@ -15,13 +15,13 @@ function iniciarSesion() {
       },
       success: function(result) {
         var result = eval('(' + result + ')');
-      
+       var mensaje="Vuelva a ingresar los datos"
         if (!result.respuesta) {
           $.messager.show({
             title: 'Error',
-            msg: result.errorMsg
-          });
-          location.href = '../login/index.php?msg='+result.errorMsg;
+            msg: mensaje
+            });
+          location.href = '../login/index.php?msg='+mensaje;
         } else {
           $.messager.show({
             title: '......Iniciando sesión......',

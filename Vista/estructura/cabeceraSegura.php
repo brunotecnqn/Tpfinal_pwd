@@ -16,10 +16,9 @@ if ($resp && $permisosOk) {
 	$puedeEntrar = true;
 	$idusuario=$objSesion->getUsuario()->getIdusuario();
 	$nombre=$objSesion->getUsuario()->getUsnombre();
-	//echo("<script>location.href = '../home/index.php';</script>");
+
 } else {
-	//	$mensaje = "Error, no tiene permisos para ingresar en la página";
-	echo ("<script>location.href = '../login/index.php?msg=Error';</script>");
+	echo ("<script>location.href = '../login/index.php?msg=Debe iniciar sesion';</script>");
 }
 
 ?>

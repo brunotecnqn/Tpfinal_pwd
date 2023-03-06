@@ -16,18 +16,18 @@ include($dir . "../estructura/cabecera.php");
             <form name="ff" id="ff" class="mb-3 mt-md-4 needs-validation" novalidate>
               <h5 class="fw-bold mb-2 text-uppercase text-center">Registrarse</h5>
               <div class="mb-3">
-                <label for="usnombre" class="form-label ">Nombre</label>
-                <input type="text" class="form-control" id="usnombre" name="usnombre" required>
+                <label for="usnombre" class="form-label fw-bold">Nombre </label>
+                <input type="text" class="form-control" id="usnombre" name="usnombre" placeholder="(min: 3 y max: 20  caracteres)" required>
               </div>
               <div class="mb-3">
-                <label for="uspass" class="form-label ">Email</label>
+                <label for="uspass" class="form-label fw-bold">Email</label>
                 <input type="email" class="form-control" id="usmail" name="usmail" required>
               </div>
               <div class="mb-3">
-                <label for="password" class="form-label ">Password</label>
-                <input type="hidden" class="form-control" id="uspass" name="uspass">
+                <label for="password" class="form-label fw-bold">Password </label>
+                <input type="hidden" class="form-control" id="uspass" name="uspass" placeholder="">
                 <input type="hidden" class="form-control" id="usdeshabilitado" name="usdeshabilitado" value="null">
-                <input type="password" class="form-control" id="password" name="password" placeholder="*******" required>
+                <input type="password" class="form-control" id="password" name="password" placeholder="(max: 8 caracteres)" required>
               </div>
 
               <div class="d-grid">

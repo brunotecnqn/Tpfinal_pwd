@@ -166,7 +166,7 @@ class Menu
         else
             $sql .= "null";
         $sql .= ");";
-        // echo $sql;
+       
         if ($base->Iniciar()) {
             if ($elid = $base->Ejecutar($sql)) {
                 $this->setIdmenu($elid);
@@ -198,7 +198,7 @@ class Menu
             }
 
             $sql .= " WHERE idmenu = " . $this->getIdmenu();
-        } // echo $sql;
+        } 
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
                 $resp = true;
@@ -216,8 +216,7 @@ class Menu
         $resp = false;
         $base = new BaseDatos();
         $sql = "DELETE FROM menu WHERE idmenu =" . $this->getIdmenu();
-        // echo $sql;
-        if ($base->Iniciar()) {
+             if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
                 $resp = true;
             } else {
@@ -228,11 +227,7 @@ class Menu
         }
         return $resp;
     }
-    /**
-     * permite listar objetos Usuario. 
-     * @param int $parametro
-     * @return boolean
-     */
+
     public static  function listar($parametro = "")
     {
 

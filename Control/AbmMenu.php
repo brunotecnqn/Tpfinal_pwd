@@ -287,3 +287,4 @@ class AbmMenu
         return count($this->obtenerHijos($arre)) > 0;
     }
 }
+?>
