@@ -6,7 +6,7 @@ $respuesta = $objC->registrarUsuario($data);
 $retorno['respuesta'] = $respuesta;
 if (!$respuesta){
     
-    $retorno['errorMsg']="No puedo registrarse el usuario";
+    $retorno['errorMsg']="No pudo registrarse el usuario";
    
 }
  echo json_encode($retorno);
