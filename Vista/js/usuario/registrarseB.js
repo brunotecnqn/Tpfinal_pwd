@@ -92,6 +92,10 @@ function validarPassword() {
     res = false;
     $("#password").removeClass("is-valid");
     $("#password").addClass("is-invalid");
+    $.messager.alert({
+      title: "Contraseña incorrecta",
+      msg: "Max: 8 caracteres",
+    });
   }
   return res;
 }
