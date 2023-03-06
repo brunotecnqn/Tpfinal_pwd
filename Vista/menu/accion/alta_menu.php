@@ -10,3 +10,4 @@ if (!$respuesta) {
 $retorno['respuesta'] = $respuesta;
 
 echo json_encode($retorno);
+?>

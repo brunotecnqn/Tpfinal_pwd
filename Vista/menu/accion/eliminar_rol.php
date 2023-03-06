@@ -8,3 +8,4 @@ if(!$respuesta){
     $retorno['errorMsg'] = "No se pudo eliminar el rol";
 }
 echo json_encode($retorno);
+?>
