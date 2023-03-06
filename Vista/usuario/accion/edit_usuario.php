@@ -5,7 +5,7 @@ $objSesion = new Session();
 
 $idusuario = $objSesion->getUsuario()->getIdusuario();
 $data["idusuario"] = $idusuario;
-
+$objC=new ABMUsuario();
 $respuesta = $objC->modificacion($data);
 
 if (!$respuesta) {

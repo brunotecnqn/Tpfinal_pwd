@@ -23,7 +23,7 @@ function darRol(idrol,idmenu) {
         } else {
           $.messager.alert({
             title: 'Mensaje',
-            msg: " se asignó nuevo rol true:"+result.respuesta
+            msg: " se asignó nuevo rol"
           });
           //cargarCarrito();
           window.location.href = window.location.href;

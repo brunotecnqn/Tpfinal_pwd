@@ -42,7 +42,10 @@ function registrar() {
       },
     });
   } else {
-   
+    $.messager.alert({
+      title: "Mensaje de error",
+      msg: "Ingrese los datos correctamente",
+    });
   }
 }
 function validarEmail() {

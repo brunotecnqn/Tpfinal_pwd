@@ -58,10 +58,9 @@ var jqxhr = $.post('accion/eliminar_rol.php?idrol='+idrol+"&idusuario="+idusuari
    } else {
      $.messager.alert({
        title: 'Mensaje',
-       msg: " se eliminó el rol true:"+result.respuesta
+       msg: " se eliminó el rol "
      });
      cargarRoles();
-     //window.location.href = window.location.href;
    }
  })
  .fail(
