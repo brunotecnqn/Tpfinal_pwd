@@ -1,55 +1,10 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 class ABMcompraestado
 {
-    //Espera como parámetro un arrego asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
-    public function abm($datos)
-    {
-        $resp = false;
-        if ($datos['accion'] == 'editar') {
-            if ($this->modificacion($datos)) {
-                $resp = true;
-            } else {
-                echo "no esta registrado";
-            }
-        }
-        if ($datos['accion'] == 'borradoLogico') {
-            if ($this->bajaLogica($datos)) {
-                $resp = true;
-            }
-        }
-        if ($datos['accion'] == 'nuevo') {
-            $objAbmce = null;
-            if (isset($datos['idcompraestado'])) {
-                $arrayabmce = ['idcompraestado' => $datos['idcompraestado']];
-                //print_r($arrayabmce);
-                $objAbmce = $this->buscar($arrayabmce);
-                //echo "<br>objAbmce me devuelve de buscar : <br>";
-                //print_r($objAbmce);
-            }
-            if ($objAbmce == null) {
-                // $mensajeResultado = $this->verificarUsuarioMail($datos);
-                //print_r($datos);
-                //print_r($mensajeResultado['Resultado']);
-                //if ($mensajeResultado==null) {
-                if (isset($datos['accion'])) {
-                    //echo $datos['accion'];
-                    // print_r($datos);
-                    if ($this->alta($datos)) {
-                        $resp = true;
-                    }
-                }
-                /*} else {
-                        echo $mensajeResultado['Mensaje'];
-                    }*/
-            } else {
-                echo "El correo electrónico ya esta registrado";
-            }
-        }
 
-
-
-        return $resp;
-    }
     /**
      * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
      *@param array $param
@@ -320,16 +275,17 @@ class ABMcompraestado
             else{
                 $respuesta["seagrego"]=false;
                 $respuesta["seactualizo"]=false;
+                
+            $retorno['errorMsg'] = "Agregue productos al carrito";
             }
         } else {
-            $mensaje = "no se pudo concretar";
+            $retorno['errorMsg'] = "No se pudo concretar";
         }
         $retorno['respuesta'] = $respuesta["seagrego"];
         $retorno['seactualizo'] = $respuesta["seactualizo"];
-        if (isset($mensaje)) {
+        
 
-            $retorno['errorMsg'] = $mensaje;
-        }
+        
         return $retorno;
     }
        /**
@@ -351,11 +307,9 @@ class ABMcompraestado
                 $data["idcompra"] = $datos["idcompra"];
                 $objCtrlCI->devolverProductos($data);
             }
-            //si la compra ya no esta en confeccion
-            $objCntrolCompra=new ABMcompra();
-            $valor["idcompra"]=$datos["idcompra"];
+           
             if ($datos["idcompraestadotipo"] > 0) {
-                $retorno['msgMail'] = enviarMail($datos["idcompra"], $datos["idcompraestadotipo"]);
+                $retorno['msgMail'] = $this->enviarMail($datos["idcompra"], $datos["idcompraestadotipo"]);
             }
         } else {
             $mensaje = "no se pudo concretar";
@@ -367,6 +321,51 @@ class ABMcompraestado
             $retorno['errorMsg'] = $mensaje;
         }
         return $retorno;
+    }
+   public function enviarMail($idcompra,$idcompraestadotipo)
+{
+$mail = new PHPMailer(true);
+
+        try {
+             //si la compra ya no esta en confeccion
+             $objCntrolCompra=new ABMcompra();
+             $valor["idcompra"]=$idcompra;
+             $listcompra=$objCntrolCompra->buscar($valor);
+             $objUsuario=$listcompra[0]->getObjUsuario();
+          
+            $objCtrlCET=new ABMcompraestadotipo();  
+            $param["idcompraestadotipo"]=$idcompraestadotipo;
+            $lista=$objCtrlCET->buscar($param);
+            $objCET=$lista[0];
+            $emailCliente=$objUsuario->getusmail();
+            $estado=$objCET->getCetdescripcion();
+            //Configuracion del servidor SMTP
+            $mail->SMTPDebug = 0;
+            $mail->isSMTP();
+            /*********************USANDO UNA SANDBOX****************/
+            $mail->Host       =  'sandbox.smtp.mailtrap.io';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = '78c7a2cf766015';
+            $mail->Password   = '8cd496cbaf6bde';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port       = 2525;
+            /********************************************************/
+            //Remitente del correo
+            $mail->setFrom('br1uno01one@gmail.com', 'Empresa');
+            //Destinatario
+            $mail->addAddress($emailCliente, 'Cliente');
+            //Archivos adjuntos(opcional, depende si esta disponible en el host)
+            $mail->addAttachment('../../css/images/logo-sis-text-2-(800p).png', 'Comunicado');      
+            $mail->isHTML(true);
+            $mail->Subject = 'Nro. pedido:'.$idcompra.', su compra ha sido '.$estado;
+            $mail->Body    = 'El estado de su compra cambio a ' .$estado; 
+
+            $mail->send();
+            $res ='El mensaje ha sido enviado correctamente';
+        } catch (Exception $e) {
+            $res="Ha ocurrido un error al enviar el mensaje: {$mail->ErrorInfo}";
+        }
+        return $res;
     }
 }
 ?>

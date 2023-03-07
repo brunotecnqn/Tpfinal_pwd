@@ -1,53 +1,6 @@
 <?php
 class ABMcompraestadotipo{
-    //Espera como parámetro un arrego asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
-    public function abm($datos){
-        $resp = false;
-        if($datos['accion']=='editar'){
-            if($this->modificacion($datos)){
-                $resp = true;
-            }
-        }
-        if($datos['accion']=='borradoLogico'){
-            if($this->bajaLogica($datos)){
-                $resp =true;
-            }
-        }
-        if ($datos['accion'] == 'nuevo') {
-            $objAbmcet=null;
-            if (isset($datos['cetdescripcion'])) {
-                $arraymail = ['cetdescripcion' => $datos['cetdescripcion']];
-                //print_r($arraymail);
-                $objAbmcet = $this->buscar($arraymail);
-                //echo "<br>objAbmcet me devuelve de buscar : <br>";
-                //print_r($objAbmcet);
-            }
-            if ($objAbmcet == null) {
-                // $mensajeResultado = $this->verificarUsuarioMail($datos);
-                //print_r($datos);
-                //print_r($mensajeResultado['Resultado']);
-                //if ($mensajeResultado==null) {
-                    if (isset($datos['accion'])) {
-                        //echo $datos['accion'];
-                        //print_r($datos);
-                        if ($this->alta($datos)) {
-                            $resp = true;
-                        }
-                    }
-                    /*} else {
-                        echo $mensajeResultado['Mensaje'];
-                    }*/
-            }
-            else {
-                echo "El correo electrónico ya esta registrado";
-            }
-        }
-
-
-
-        return $resp;
-
-        }
+  
      /**
      * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
     *@param array $param
@@ -153,11 +106,9 @@ class ABMcompraestadotipo{
                 $where.=" and cetdescripcion ='".$param['cetdescripcion']."'";
             
         }
-        //print_r($where);
-        //echo "<br>";
+      
         $arreglo = CompraEstadoTipo::listar($where);
-        //echo "Estoy en buscar \n";
-        //print_r($arreglo);
+        
     
         return $arreglo;
        }
