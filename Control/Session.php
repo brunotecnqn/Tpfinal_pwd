@@ -87,7 +87,7 @@ class Session
      */
     public function getRol()
     {
-        $list_rol = null;
+        $list_rol = [];
         if ($this->validar()) {
             $obj = new ABMUsuario();
             $param['idusuario'] = $_SESSION['idusuario'];
