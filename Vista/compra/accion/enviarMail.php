@@ -12,8 +12,12 @@ function enviarMail($idcompra,$idcompraestadotipo)
 $mail = new PHPMailer(true);
 
         try {
-            $objSesion=new Session(); 
-          $objUsuario=$objSesion->getUsuario();
+             //si la compra ya no esta en confeccion
+             $objCntrolCompra=new ABMcompra();
+             $valor["idcompra"]=$idcompra;
+             $listcompra=$objCntrolCompra->buscar($valor);
+             $objUsuario=$listcompra[0]->getObjUsuario();
+          
             $objCtrlCET=new ABMcompraestadotipo();  
             $param["idcompraestadotipo"]=$idcompraestadotipo;
             $lista=$objCtrlCET->buscar($param);

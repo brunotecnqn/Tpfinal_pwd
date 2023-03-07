@@ -352,6 +352,8 @@ class ABMcompraestado
                 $objCtrlCI->devolverProductos($data);
             }
             //si la compra ya no esta en confeccion
+            $objCntrolCompra=new ABMcompra();
+            $valor["idcompra"]=$datos["idcompra"];
             if ($datos["idcompraestadotipo"] > 0) {
                 $retorno['msgMail'] = enviarMail($datos["idcompra"], $datos["idcompraestadotipo"]);
             }
